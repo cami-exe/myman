@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>For my love, mio Val</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('wpp.png') center/cover no-repeat fixed;;
+  font-family: sans-serif;
+}
+
+.scene {
+  perspective: 2500px;
+  perspective-origin: center center;
+}
+
+.paper {
+  width: 420px;
+  height: 594px;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transform: translateY(-25%);
+  transition: transform 1.1s cubic-bezier(.65,.05,.36,1);
+}
+
+.bottom-inside {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  bottom: 0;
+  background: #F3F5EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #ddd;
+  box-shadow: inset 0 15px 25px rgba(0,0,0,0.05);
+}
+
+.fold {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 0;
+  transform-origin: bottom center;
+  transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(.65,.05,.36,1);
+  transform: rotateX(-180deg);
+}
+
+.top-inside,
+.top-outside {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.top-inside {
+  background: #F3F5EA;
+}
+
+.top-outside {
+  background: #F3F5EA;
+  transform: rotateX(180deg);
+  box-shadow: 0 -15px 30px rgba(0,0,0,0.15);
+}
+
+/* Estilos para las imágenes */
+.bottom-inside img,
+.top-inside img,
+.top-outside img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.paper.open {
+  transform: translateY(0);
+}
+
+.paper.open .fold {
+  transform: rotateX(0deg);
+}
+
+
+/* Animación de brillos */
+@keyframes sparkle {
+  0% { 
+    opacity: 0; 
+    transform: translate(0, 0) scale(0) rotate(0deg); 
+  }
+  50% { 
+    opacity: 1; 
+    transform: translate(var(--tx), var(--ty)) scale(1) rotate(180deg); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translate(var(--tx), var(--ty)) scale(0) rotate(360deg); 
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  animation: sparkle 0.6s ease-out forwards;
+  font-size: 16px;
+}
+
+
+
+/* Contenedor de stickers */
+.sticker {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  z-index: 10;
+  transition: transform 0.1s ease;
+}
+
+.sticker:active {
+  cursor: grabbing;
+  transform: scale(1.1);
+}
+
+.sticker img {
+  height:150px;
+  pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+  <div class="paper" id="paper">
+
+    <div class="bottom-inside">
+      <img src="3.png" alt="Imagen interior inferior">
+    </div>
+
+    <div class="fold">
+
+      <div class="top-inside">
+        <img src="2.png" alt="Imagen interior superior">
+      </div>
+
+      <div class="top-outside">
+        <img src="solapaatras.png" alt="Imagen exterior">
+      </div>
+
+    </div>
+
+  </div>
+
+  
+  <!-- Stickers arrastrables -->
+  <div class="sticker" style="left: 50px; top: 50px;">
+    <img src="se.png" alt="se">
+  </div>
+  
+  <div class="sticker" style="left: 80px; top: 80px;">
+    <img src="https://i.pinimg.com/originals/40/98/3d/40983d7a4691d953d7a21cf00cb70a0b.png" alt="estrella">
+  </div>
+
+    <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="https://i.pinimg.com/originals/b2/f3/8c/b2f38c26610430b1b607c13719213a80.png" alt="estrella">
+  </div>
+
+    <div class="sticker" style="left: 150px; top: 80px;">
+     <img src="https://i.pinimg.com/originals/2e/c6/24/2ec624ec151ad80957474224d28aa4ec.png" alt="estrella">
+  </div>
+
+    <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="image-removebg-preview.png" alt="T">
+     </div>
+
+     <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="https://i.pinimg.com/originals/2b/60/7b/2b607b4bef64dd3ba710f10ba77215a4.png" alt="estrella">
+     </div>
+
+     <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="descarga.png" alt="estrella">
+     </div>
+
+     <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="se2.png" alt="estrella">
+     </div>
+
+     <div class="sticker" style="left: 150px; top: 80px;">
+        <img src="a.png" alt="estrella">
+     </div>
+</div>
+
+</div>
+
+<script>
+const paper = document.getElementById("paper");
+
+paper.addEventListener("click", (e) => {
+  paper.classList.toggle("open");
+  
+  // Crear brillos
+  for(let i = 0; i < 8; i++) {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.textContent = "V♡C";
+    sparkle.style.left = e.offsetX + "px";
+    sparkle.style.top = e.offsetY + "px";
+    sparkle.style.animationDelay = (i * 0.05) + "s";
+    
+    // Posición aleatoria alrededor del clic
+    const angle = (360 / 8) * i;
+    const distance = 30 + Math.random() * 20;
+    sparkle.style.setProperty('--tx', Math.cos(angle * Math.PI / 180) * distance + 'px');
+    sparkle.style.setProperty('--ty', Math.sin(angle * Math.PI / 180) * distance + 'px');
+    
+    paper.appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 600);
+  }
+});
+
+// Drag and drop para stickers
+const stickers = document.querySelectorAll('.sticker');
+
+stickers.forEach(sticker => {
+  let isDragging = false;
+  let startX, startY, initialX, initialY;
+  
+  sticker.addEventListener('mousedown', startDragSticker);
+  sticker.addEventListener('touchstart', startDragSticker);
+  
+  function startDragSticker(e) {
+    e.stopPropagation(); // Evita que abra/cierre la carta
+    isDragging = true;
+    
+    const touch = e.type.includes('touch') ? e.touches[0] : e;
+    startX = touch.clientX;
+    startY = touch.clientY;
+    
+    const rect = sticker.getBoundingClientRect();
+    const parent = sticker.parentElement.getBoundingClientRect();
+    
+    initialX = rect.left - parent.left;
+    initialY = rect.top - parent.top;
+    
+    sticker.style.zIndex = 1000;
+    
+    document.addEventListener('mousemove', dragSticker);
+    document.addEventListener('touchmove', dragSticker);
+    document.addEventListener('mouseup', stopDragSticker);
+    document.addEventListener('touchend', stopDragSticker);
+  }
+  
+  function dragSticker(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    
+    const touch = e.type.includes('touch') ? e.touches[0] : e;
+    const deltaX = touch.clientX - startX;
+    const deltaY = touch.clientY - startY;
+    
+    sticker.style.left = (initialX + deltaX) + 'px';
+    sticker.style.top = (initialY + deltaY) + 'px';
+  }
+  
+  function stopDragSticker() {
+    isDragging = false;
+    sticker.style.zIndex = 10;
+    document.removeEventListener('mousemove', dragSticker);
+    document.removeEventListener('touchmove', dragSticker);
+    document.removeEventListener('mouseup', stopDragSticker);
+    document.removeEventListener('touchend', stopDragSticker);
+  }
+});
+</script>
+
+</body>
+</html>
