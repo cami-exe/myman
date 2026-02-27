@@ -2,12 +2,16 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For my love, mio Val</title>
 
 <style>
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,18 +19,25 @@ body {
   font-family: sans-serif;
 }
 
+html {
+  overflow: hidden;  /* Por si acaso */
+  height: 100%;
+  width: 100%;
+}
 .scene {
   perspective: 2500px;
   perspective-origin: center center;
+  max-width: 100vw;  /* AGREGA */
+  max-height: 100vh;  /* AGREGA */
 }
 
 .paper {
-  width: 420px;
-  height: 594px;
+  width: 90vw;  /* 90% del ancho de la pantalla */
+  height: calc(90vw * 1.414);  /* Mantiene proporción A4 */
   position: relative;
   transform-style: preserve-3d;
   cursor: pointer;
-  transform: translateY(-25%);
+  transform: translateY(0);
   transition: transform 1.1s cubic-bezier(.65,.05,.36,1);
 }
 
@@ -176,9 +187,6 @@ body {
     <img src="https://i.pinimg.com/originals/40/98/3d/40983d7a4691d953d7a21cf00cb70a0b.png" alt="estrella">
   </div>
 
-    <div class="sticker" style="left: 150px; top: 80px;">
-        <img src="https://i.pinimg.com/originals/b2/f3/8c/b2f38c26610430b1b607c13719213a80.png" alt="estrella">
-  </div>
 
     <div class="sticker" style="left: 150px; top: 80px;">
      <img src="https://i.pinimg.com/originals/2e/c6/24/2ec624ec151ad80957474224d28aa4ec.png" alt="estrella">
